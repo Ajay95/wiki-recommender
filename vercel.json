@@ -1,9 +1,4 @@
 {
-    "buildCommand": "next build",
-    "outputDirectory": ".",
-    "git": {
-      "deploymentEnabled": {
-        "main": true
-      }
-    }
-  }
+  "buildCommand": "next build",
+  "framework": "nextjs"
+}
