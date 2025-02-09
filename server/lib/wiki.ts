@@ -4,8 +4,7 @@ export async function getWikiImage(pageId: number): Promise<string | null> {
     const response = await fetch(
       `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&pithumbsize=1200&pageids=${pageId}&origin=*`,
       { 
-        next: { revalidate: 86400 },
-        priority: 'high' // Prioritize these requests
+        next: { revalidate: 86400 }
       }
     )
     const data = await response.json()
