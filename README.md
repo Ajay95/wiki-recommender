@@ -5,3 +5,5 @@ A TikTok-style Wikipedia article recommendation system built with:
 - tRPC
 - Pinecone
 - Tailwind CSS
+- OpenRouter
+

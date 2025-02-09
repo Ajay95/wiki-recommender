@@ -5,19 +5,31 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.36.1",
-    "@trpc/client": "^10.43.6",
-    "@trpc/react-query": "^10.43.6",
-    "@trpc/server": "^10.43.6",
+    "@heroicons/react": "^2.2.0",
+    "@pinecone-database/pinecone": "^4.1.0",
+    "@tanstack/react-query": "4.36.1",
+    "@trpc/client": "10.43.6",
+    "@trpc/react-query": "10.43.6",
+    "@trpc/server": "10.43.6",
+    "ai": "^4.1.25",
     "next": "13.5.6",
+    "openai": "^4.83.0",
+    "pm2": "^5.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.15.1",
+    "react-markdown": "^9.0.3",
+    "react-timer-hook": "^3.0.8",
+    "tailwindcss-scroll-snap": "^1.1.0",
     "typescript": "5.2.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "@types/node": "20.5.7"
+    "@types/node": "^22.13.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "10.4.16",
+    "postcss": "8.4.31",
+    "tailwindcss": "3.3.0"
   }
 }

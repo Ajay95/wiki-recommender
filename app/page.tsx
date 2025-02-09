@@ -1,15 +1,20 @@
-'use client';
-import { trpc } from './_trpc/client';
+import { ArticleList } from './components/ArticleList'
+import { getInitialArticles } from './actions/articles'
 
-export default function Home() {
-  const hello = trpc.hello.useQuery();
+export default async function Home() {
+  const initialArticle = await getInitialArticles()
   
-  if (hello.isLoading) return <div>Loading...</div>;
-  if (hello.error) return <div>Error: {hello.error.message}</div>;
-  
+  if (!initialArticle) {
+    return (
+      <div className="h-screen bg-black text-white flex items-center justify-center">
+        Loading...
+      </div>
+    )
+  }
+
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-2xl">{hello.data}</h1>
-    </main>
-  );
+    <div className="bg-black min-h-screen">
+      <ArticleList initialArticle={initialArticle} />
+    </div>
+  )
 }

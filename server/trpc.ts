@@ -1,6 +1,11 @@
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from '@trpc/server'
+import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 
-const t = initTRPC.create();
+export const createContext = async (_opts: FetchCreateContextFnOptions) => {
+  return {}
+}
 
-export const router = t.router;
-export const publicProcedure = t.procedure;
+const t = initTRPC.context<typeof createContext>().create()
+
+export const router = t.router
+export const publicProcedure = t.procedure
