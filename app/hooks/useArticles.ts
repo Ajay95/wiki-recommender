@@ -10,12 +10,10 @@ import { useInView } from 'react-intersection-observer'
 export function useArticles(initialArticle: WikiArticle) {
   const [articles, setArticles] = useState<WikiArticle[]>([initialArticle])
   const [pageParam, setPageParam] = useState<number>(1)
+  const [isRefreshing, setIsRefreshing] = useState(false)
   const { ref, inView } = useInView({
     threshold: 0.5,
   })
-
-  console.log('Current pageParam:', pageParam)
-  console.log('Current articles:', articles)
 
   const { data, isLoading, refetch } = trpc.getArticles.useQuery(
     {
@@ -23,36 +21,31 @@ export function useArticles(initialArticle: WikiArticle) {
       limit: 5,
     },
     {
-      enabled: inView,
+      enabled: inView && !isRefreshing,
+      staleTime: 0,
       onSuccess: (newData) => {
-        console.log('tRPC query success. New data:', newData)
         if (newData.items.length > 0) {
-          // Always append new articles to maintain history
-          console.log('Appending new articles')
           setArticles(prev => [...prev, ...newData.items])
           setPageParam(newData.nextCursor)
         }
       },
-      onError: (error) => {
-        console.error('tRPC query error:', error)
-      }
     }
   )
 
-  // Manual refresh handler - only called explicitly
   const handleRefresh = useCallback(async () => {
-    console.log('Manual refresh triggered')
+    if (isRefreshing) return
+    setIsRefreshing(true)
     try {
-      const response = await refetch()
-      console.log('Manual refresh complete:', response)
-    } catch (error) {
-      console.error('Manual refresh error:', error)
+      await refetch()
+    } finally {
+      setIsRefreshing(false)
     }
-  }, [refetch])
+  }, [refetch, isRefreshing])
 
   return {
     articles,
-    isLoading,
+    setArticles,
+    isLoading: isLoading || isRefreshing,
     ref,
     hasNextPage: data?.items.length === 5,
     refresh: handleRefresh

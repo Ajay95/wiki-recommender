@@ -1,10 +1,19 @@
 // app/actions/articles.ts
+'use server'
+
+
 import { getPineconeIndex } from '@/server/lib/pinecone'
 import { getWikiImage } from '@/server/lib/wiki'
 import { WikiArticle } from '../types'
 import { PineconeMetadata } from '../types/pinceonemetadata'
 
 const index = getPineconeIndex()
+
+export async function refreshInitialArticle() {
+  return getInitialArticles()
+}
+
+
 
 export async function getInitialArticles(): Promise<WikiArticle | null> {
   try {
