@@ -12,7 +12,7 @@ export function ArticleList({ initialArticle }: ArticleListProps) {
   const { articles, isLoading, ref } = useArticles(initialArticle)
 
   return (
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory">
+    <div className="h-[100vh] w-full overflow-y-auto snap-y snap-mandatory touch-pan-y">
       {articles.map((article, index) => (
         <div 
           key={article.id} 
@@ -29,7 +29,7 @@ export function ArticleList({ initialArticle }: ArticleListProps) {
       ))}
       {isLoading && (
         <div className="h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white" />
         </div>
       )}
     </div>
